@@ -16,13 +16,13 @@ The editor is WYSIWYG and includes formatting tools whilst retaining the ability
 ### Install
 
 ```bash
-yarn add rich-markdown-editor
+yarn add @hackernoon/rich-markdown-editor
 ```
 
 or
 
 ```bash
-npm install rich-markdown-editor
+npm install @hackernoon/rich-markdown-editor
 ```
 
 Note that `react`, `react-dom`, and `styled-components` are _required_ peer dependencies.
