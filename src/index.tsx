@@ -90,6 +90,7 @@ export type Props = {
   defaultValue: string;
   placeholder: string;
   extensions?: Extension[];
+  sponsored: boolean;
   disableExtensions?: (
     | "strong"
     | "code_inline"
@@ -364,6 +365,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
           new TemplatePlaceholder(),
           new Underline(),
           new Link({
+            sponsored: this.props.sponsored,
             onKeyboardShortcut: this.handleOpenLinkMenu,
             onClickLink: this.props.onClickLink,
             onClickHashtag: this.props.onClickHashtag,

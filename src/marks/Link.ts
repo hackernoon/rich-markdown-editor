@@ -52,7 +52,9 @@ export default class Link extends Mark {
         "a",
         {
           ...node.attrs,
-          rel: "noopener noreferrer ugc",
+          rel: `noopener noreferrer ${
+            this.options.sponsored ? "sponsored" : "ugc"
+          }`,
         },
         0,
       ],
