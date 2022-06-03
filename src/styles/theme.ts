@@ -1,5 +1,5 @@
 const colors = {
-  almostBlack: "#181A1B",
+  almostBlack: "#212428",
   lightBlack: "#2F3336",
   almostWhite: "#E6E6E6",
   white: "#FFF",
@@ -25,7 +25,7 @@ export const base = {
   placeholder: "#B1BECC",
   textSecondary: "#4E5C6E",
   textLight: colors.white,
-  textHighlight: "#b3e7ff",
+  textHighlight: "#9cffa3",
   textHighlightForeground: colors.black,
   selected: colors.primary,
   codeComment: "#6a737d",
