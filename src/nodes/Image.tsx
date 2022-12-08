@@ -481,10 +481,6 @@ const Caption = styled.p`
   user-select: text;
   cursor: text;
 
-  &:empty:not(:focus) {
-    visibility: hidden;
-  }
-
   &:empty:before {
     color: ${props => props.theme.placeholder};
     content: attr(data-caption);
