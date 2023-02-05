@@ -10,7 +10,7 @@ let uploadId = 0;
 
 const insertFiles = function(
   view: EditorView,
-  event: Event,
+  event: Event | null = null,
   pos: number,
   files: File[],
   options: {
@@ -43,7 +43,7 @@ const insertFiles = function(
 
   // okay, we have some dropped images and a handler – lets stop this
   // event going any further up the stack
-  event.preventDefault();
+  if (event) event.preventDefault();
 
   // let the user know we're starting to process the images
   if (onImageUploadStart) onImageUploadStart();

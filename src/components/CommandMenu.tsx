@@ -1,4 +1,5 @@
 import * as React from "react";
+import uploader from "../uppload/init";
 import capitalize from "lodash/capitalize";
 import { Portal } from "react-portal";
 import { EditorView } from "prosemirror-view";
@@ -60,7 +61,6 @@ type State = {
 
 class CommandMenu<T = MenuItem> extends React.Component<Props<T>, State> {
   menuRef = React.createRef<HTMLDivElement>();
-  inputRef = React.createRef<HTMLInputElement>();
 
   state: State = {
     left: -1000,
@@ -249,17 +249,17 @@ class CommandMenu<T = MenuItem> extends React.Component<Props<T>, State> {
   };
 
   triggerImagePick = () => {
-    if (this.inputRef.current) {
-      this.inputRef.current.click();
-    }
+    uploader.uploader = this.handleImagePicked;
+    uploader.open();
   };
 
   triggerLinkInput = item => {
     this.setState({ insertItem: item });
   };
 
-  handleImagePicked = event => {
-    const files = getDataTransferFiles(event);
+  handleImagePicked = file => {
+
+    const files = [file]
 
     const {
       view,
@@ -278,17 +278,13 @@ class CommandMenu<T = MenuItem> extends React.Component<Props<T>, State> {
     }
 
     if (parent) {
-      insertFiles(view, event, parent.pos, files, {
+      insertFiles(view, null, parent.pos, files, {
         uploadImage,
         onImageUploadStart,
         onImageUploadStop,
         onShowToast,
         dictionary: this.props.dictionary,
       });
-    }
-
-    if (this.inputRef.current) {
-      this.inputRef.current.value = "";
     }
 
     this.props.onClose();
@@ -512,16 +508,6 @@ class CommandMenu<T = MenuItem> extends React.Component<Props<T>, State> {
                 </ListItem>
               )}
             </List>
-          )}
-          {uploadImage && (
-            <VisuallyHidden>
-              <input
-                type="file"
-                ref={this.inputRef}
-                onChange={this.handleImagePicked}
-                accept="image/*"
-              />
-            </VisuallyHidden>
           )}
         </Wrapper>
       </Portal>
