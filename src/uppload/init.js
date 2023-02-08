@@ -9,7 +9,6 @@ import {
   Pexels,
   Pixabay,
   GIPHY,
-  de,
 } from "@hackernoon/uppload";
 
 import "./uppload.css";
@@ -33,6 +32,7 @@ const uploaders = [
   new Unsplash("7da1761f709e24f5f9fb583e204ba251c9c293a32aba7b3ef58615d03d2557b5"),
   new Pexels("563492ad6f91700001000001feebfb59ae024f1693331c45f63f627e"),
   new Pixabay("18641614-f387f893b9d91652203cb55c9"),
+  new GIPHY(),
 ];
 
 uploader.use(uploaders);
