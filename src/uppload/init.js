@@ -11,9 +11,6 @@ import {
   GIPHY,
 } from "@hackernoon/uppload";
 
-import "./uppload.css";
-import "./light.css";
-
 var uploader = new Uppload({
   lang: en,
   defaultService: "local",
