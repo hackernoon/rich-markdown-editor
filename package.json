@@ -24,6 +24,7 @@
     ]
   },
   "dependencies": {
+    "@hackernoon/uppload": "^3.2.3",
     "copy-to-clipboard": "^3.0.8",
     "fuzzy-search": "^3.2.1",
     "gemoji": "6.x",
