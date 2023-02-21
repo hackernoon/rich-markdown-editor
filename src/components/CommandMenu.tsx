@@ -22,7 +22,6 @@ import {
   Unsplash,
   Pexels,
   Pixabay,
-  GIPHY,
 } from "@hackernoon/uppload";
 
 const SSR = typeof window === "undefined";
@@ -60,6 +59,7 @@ export type Props<T extends MenuItem = MenuItem> = {
   filterable?: boolean;
   items: T[];
   id?: string;
+  uploaders?: any[];
 };
 
 type State = {
@@ -281,8 +281,13 @@ class CommandMenu<T = MenuItem> extends React.Component<Props<T>, State> {
         new Unsplash("7da1761f709e24f5f9fb583e204ba251c9c293a32aba7b3ef58615d03d2557b5"),
         new Pexels("563492ad6f91700001000001feebfb59ae024f1693331c45f63f627e"),
         new Pixabay("18641614-f387f893b9d91652203cb55c9"),
-        new GIPHY(),
       ];
+
+      if (this.props?.uploaders && this.props.uploaders.length > 0) {
+        this.props.uploaders.forEach((u) => {
+          uploaders.push(new u());
+        });
+      }
       
       uploader.use(uploaders);
 
