@@ -136,6 +136,7 @@ export type Props = {
     [name: string]: (view: EditorView, event: Event) => boolean;
   };
   uploadImage?: (file: File) => Promise<string>;
+  onSelect?: (text: any) => void;
   onBlur?: () => void;
   onFocus?: () => void;
   onSave?: ({ done: boolean }) => void;
@@ -188,6 +189,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     embeds: [],
     extensions: [],
     tooltip: Tooltip,
+    onSelect: () => { },
   };
 
   state = {
@@ -275,6 +277,15 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
       if (this.props.onBlur) {
         this.props.onBlur();
       }
+    }
+
+    if (this.props.onSelect && this.state.selectionMenuOpen) {
+      this.props.onSelect(
+        this.view.state.doc.slice(
+          this.view.state.selection.from,
+          this.view.state.selection.to
+        ).content
+      );
     }
 
     if (

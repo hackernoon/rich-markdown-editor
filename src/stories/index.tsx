@@ -103,6 +103,9 @@ export default function Example(props) {
             }, 1500);
           });
         }}
+        onSelect={async text => {
+
+        })
         onSearchLink={async term => {
           console.log("Searched link: ", term);
 

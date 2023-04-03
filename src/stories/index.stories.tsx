@@ -215,6 +215,14 @@ Focused.args = {
   This editor starts in focus`,
 };
 
+export const Selection = Template.bind({});
+Selection.args = {
+  onSelect: selection => console.log(selection),
+  defaultValue: `# Selection
+  
+  select some text`,
+};
+
 export const Dark = Template.bind({});
 Dark.args = {
   dark: true,
