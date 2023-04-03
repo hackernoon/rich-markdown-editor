@@ -1,8 +1,8 @@
 import {
   BoldIcon,
   CodeIcon,
-  Heading1Icon,
   Heading2Icon,
+  Heading3Icon,
   BlockQuoteIcon,
   LinkIcon,
   StrikethroughIcon,
@@ -74,17 +74,17 @@ export default function formattingMenuItems(
     {
       name: "heading",
       tooltip: dictionary.heading,
-      icon: Heading1Icon,
-      active: isNodeActive(schema.nodes.heading, { level: 1 }),
-      attrs: { level: 1 },
+      icon: Heading2Icon,
+      active: isNodeActive(schema.nodes.heading, { level: 2 }),
+      attrs: { level: 2 },
       visible: allowBlocks,
     },
     {
       name: "heading",
       tooltip: dictionary.subheading,
-      icon: Heading2Icon,
-      active: isNodeActive(schema.nodes.heading, { level: 2 }),
-      attrs: { level: 2 },
+      icon: Heading3Icon,
+      active: isNodeActive(schema.nodes.heading, { level: 3 }),
+      attrs: { level: 3 },
       visible: allowBlocks,
     },
     {
