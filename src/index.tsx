@@ -189,7 +189,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     embeds: [],
     extensions: [],
     tooltip: Tooltip,
-    onSelect: () => { },
+    onSelect: () => {}
   };
 
   state = {
@@ -267,6 +267,22 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     }
 
     if (
+      this.props.onSelect &&
+      this.state.selectionMenuOpen &&
+      !this.isBlurred
+    ) {
+      const text = this.view.state.doc.cut(
+        this.view.state.selection.from,
+        this.view.state.selection.to
+      );
+      this.props.onSelect({
+        view: this.view,
+        text: text.textContent,
+        markdown: this.serializer.serialize(text),
+      });
+    }
+
+    if (
       !this.isBlurred &&
       !this.state.isEditorFocused &&
       !this.state.blockMenuOpen &&
@@ -277,15 +293,6 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
       if (this.props.onBlur) {
         this.props.onBlur();
       }
-    }
-
-    if (this.props.onSelect && this.state.selectionMenuOpen) {
-      this.props.onSelect(
-        this.view.state.doc.slice(
-          this.view.state.selection.from,
-          this.view.state.selection.to
-        ).content
-      );
     }
 
     if (
