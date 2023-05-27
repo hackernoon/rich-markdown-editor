@@ -126,6 +126,7 @@ export type Props = {
   readOnlyWriteCheckboxes?: boolean;
   dictionary?: Partial<typeof baseDictionary>;
   dark?: boolean;
+  enablePeopleTag?: boolean; //enable people tagging system, based on onSearchLink
   dir?: string;
   theme?: typeof theme;
   template?: boolean;
@@ -146,6 +147,7 @@ export type Props = {
   onImageUploadStop?: () => void;
   onCreateLink?: (title: string) => Promise<string>;
   onSearchLink?: (term: string) => Promise<SearchResult[]>;
+  handleLinkSelected?: (href: string, title: string) => void; //check which link was selected from search list
   onClickLink: (href: string, event: MouseEvent) => void;
   onHoverLink?: (event: MouseEvent) => boolean;
   onClickHashtag?: (tag: string, event: MouseEvent) => void;
@@ -750,6 +752,15 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
     }
   );
 
+  handleKeyDown = (e:React.KeyboardEvent<HTMLDivElement>) => {
+    if(this.props.onKeyDown){
+      this?.props?.onKeyDown(e);
+    }
+    if(this.props.enablePeopleTag && this.props.onSearchLink && e.key === "@"){
+      this.handleOpenLinkMenu();
+    }
+  }
+
   render() {
     const {
       dir,
@@ -765,7 +776,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
 
     return (
       <Flex
-        onKeyDown={onKeyDown}
+        onKeyDown={this.handleKeyDown}
         style={style}
         className={className}
         align="flex-start"
@@ -803,6 +814,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
                   isActive={this.state.linkMenuOpen}
                   onCreateLink={this.props.onCreateLink}
                   onSearchLink={this.props.onSearchLink}
+                  handleLinkSelected={this.props.handleLinkSelected}
                   onClickLink={this.props.onClickLink}
                   onShowToast={this.props.onShowToast}
                   onClose={this.handleCloseLinkMenu}

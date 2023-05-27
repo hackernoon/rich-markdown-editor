@@ -104,8 +104,6 @@ export default function Example(props) {
           });
         }}
         onSearchLink={async term => {
-          console.log("Searched link: ", term);
-
           // Delay to simulate time taken for remote API request to complete
           return new Promise(resolve => {
             setTimeout(() => {

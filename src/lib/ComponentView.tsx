@@ -1,5 +1,7 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
+
 import { ThemeProvider } from "styled-components";
 import { EditorView, Decoration } from "prosemirror-view";
 import Extension from "../lib/Extension";
@@ -57,10 +59,13 @@ export default class ComponentView {
       getPos: this.getPos,
     });
 
-    ReactDOM.render(
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>,
-      this.dom
-    );
+    const root = createRoot(this.dom);
+    root.render(<ThemeProvider theme={theme}>{children}</ThemeProvider>)
+
+    // ReactDOM.render(
+    //   <ThemeProvider theme={theme}>{children}</ThemeProvider>,
+    //   this.dom
+    // );
   }
 
   update(node) {
