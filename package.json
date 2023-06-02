@@ -1,7 +1,7 @@
 {
   "name": "@hackernoon/rich-markdown-editor",
   "description": "A rich text editor with Markdown shortcuts",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "BSD-3-Clause",
@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@hackernoon/uppload": "^3.2.3",
+    "@storybook/addon-postcss": "^2.0.0",
     "copy-to-clipboard": "^3.0.8",
     "fuzzy-search": "^3.2.1",
     "gemoji": "6.x",
@@ -101,8 +102,8 @@
     "eslint-plugin-react-hooks": "^4.0.8",
     "jest": "^26.6.3",
     "prettier": "^1.19.1",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "source-map-loader": "^0.2.4",
     "styled-components": "^5.2.1",
     "ts-loader": "^6.2.1",

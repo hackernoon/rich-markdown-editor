@@ -12,6 +12,7 @@ type Props = {
   dictionary: typeof baseDictionary;
   onCreateLink?: (title: string) => Promise<string>;
   onSearchLink?: (term: string) => Promise<SearchResult[]>;
+  handleLinkSelected?: (href: string, title: string) => void
   onClickLink: (href: string, event: MouseEvent) => void;
   onShowToast?: (msg: string, code: string) => void;
   onClose: () => void;
@@ -103,10 +104,11 @@ export default class LinkToolbar extends React.Component<Props> {
     from: number;
     to: number;
   }) => {
-    const { view, onClose } = this.props;
+    const { view, onClose, handleLinkSelected } = this.props;
 
     onClose();
     this.props.view.focus();
+    if(handleLinkSelected) handleLinkSelected(href, title);
 
     const { dispatch, state } = view;
     const { from, to } = state.selection;
