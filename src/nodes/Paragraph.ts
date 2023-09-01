@@ -10,7 +10,7 @@ export default class Paragraph extends Node {
     return {
       content: "inline*",
       group: "block",
-      parseDOM: [{ tag: "p" }],
+      parseDOM: [{ tag: "p", preserveWhitespace: true }],
       toDOM: () => ["p", 0],
     };
   }
