@@ -1,5 +1,7 @@
 export default function backspaceToParagraph(type) {
   return (state, dispatch) => {
+    if (!state) return null;
+
     const { $from, from, to, empty } = state.selection;
 
     // if the selection has anything in it then use standard delete behavior
