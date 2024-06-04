@@ -72,6 +72,7 @@ import Folding from "./plugins/Folding";
 import History from "./plugins/History";
 import Keys from "./plugins/Keys";
 import MaxLength from "./plugins/MaxLength";
+import Gpt from "./plugins/Gpt";
 import Placeholder from "./plugins/Placeholder";
 import SmartText from "./plugins/SmartText";
 import TrailingNode from "./plugins/TrailingNode";
@@ -131,6 +132,7 @@ export type Props = {
   template?: boolean;
   headingsOffset?: number;
   maxLength?: number;
+  onGpt?: any;
   scrollTo?: string;
   handleDOMEvents?: {
     [name: string]: (view: EditorView, event: Event) => boolean;
@@ -422,6 +424,9 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
           }),
           new MaxLength({
             maxLength: this.props.maxLength,
+          }),
+          new Gpt({
+            onGpt: this.props.onGpt,
           }),
         ].filter(extension => {
           // Optionaly disable extensions

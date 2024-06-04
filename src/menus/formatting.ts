@@ -12,6 +12,7 @@ import {
   InputIcon,
   HighlightIcon,
 } from "outline-icons";
+import GptIcon from "../icons/GptIcon";
 import { isInTable } from "prosemirror-tables";
 import { EditorState } from "prosemirror-state";
 import isInList from "../queries/isInList";
@@ -129,6 +130,12 @@ export default function formattingMenuItems(
       tooltip: dictionary.createLink,
       icon: LinkIcon,
       active: isMarkActive(schema.marks.link),
+      attrs: { href: "" },
+    },
+    {
+      name: "gpt",
+      tooltip: "gpt",
+      icon: GptIcon,
       attrs: { href: "" },
     },
   ];

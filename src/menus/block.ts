@@ -16,6 +16,7 @@ import {
   LinkIcon,
 } from "outline-icons";
 import { MenuItem } from "../types";
+import GptIcon from "../icons/GptIcon.js";
 import baseDictionary from "../dictionary";
 
 const SSR = typeof window === "undefined";
@@ -105,6 +106,12 @@ export default function blockMenuItems(
       title: dictionary.image,
       icon: ImageIcon,
       keywords: "picture photo",
+    },
+    {
+      name: "gpt",
+      title: "GPT",
+      icon: GptIcon,
+      keywords: "gpt",
     },
     {
       name: "link",

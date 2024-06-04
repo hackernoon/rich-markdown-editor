@@ -8,10 +8,10 @@
   "scripts": {
     "test": "jest",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet",
-    "start": "start-storybook -p 6006",
-    "build": "tsc",
-    "preversion": "yarn build",
-    "watch": "yarn tsc-watch",
+    "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
+    "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && tsc",
+    "preversion": "export SET NODE_OPTIONS=--openssl-legacy-provider && yarn build",
+    "watch": "export SET NODE_OPTIONS=--openssl-legacy-provider && yarn tsc-watch",
     "build-storybook": "build-storybook"
   },
   "serve": {
