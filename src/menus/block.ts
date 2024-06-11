@@ -107,12 +107,12 @@ export default function blockMenuItems(
       icon: ImageIcon,
       keywords: "picture photo",
     },
-    {
-      name: "gpt",
-      title: "GPT",
-      icon: GptIcon,
-      keywords: "gpt",
-    },
+    // {
+    //   name: "gpt",
+    //   title: "GPT",
+    //   icon: GptIcon,
+    //   keywords: "gpt",
+    // },
     {
       name: "link",
       title: dictionary.link,
