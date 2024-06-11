@@ -263,7 +263,7 @@ class CommandMenu<T = MenuItem> extends React.Component<Props<T>, State> {
 
   triggerImagePick = () => {
     if (!SSR) {
-      let uploader = new Uppload({
+      const uploader = new Uppload({
         lang: en,
         defaultService: "local",
         uploader: file => this.handleImagePicked(null, file),
@@ -284,14 +284,13 @@ class CommandMenu<T = MenuItem> extends React.Component<Props<T>, State> {
       ];
 
       if (this.props?.uploaders && this.props.uploaders.length > 0) {
-        this.props.uploaders.forEach((u) => {
+        this.props.uploaders.forEach(u => {
           uploaders.push(new u());
         });
       }
-      
       uploader.use(uploaders);
 
-      uploader.open()
+      uploader.open();
     } else if (this.inputRef.current) {
       this.inputRef.current.click();
     }
@@ -301,7 +300,7 @@ class CommandMenu<T = MenuItem> extends React.Component<Props<T>, State> {
     this.setState({ insertItem: item });
   };
 
-  handleImagePicked = (event, file=null) => {
+  handleImagePicked = (event, file = null) => {
     let files;
     if (event) files = getDataTransferFiles(event);
     else files = [file];
