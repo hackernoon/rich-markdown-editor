@@ -242,3 +242,11 @@ RTL.args = {
 - [x] آیتم اول
 - [ ] آیتم دوم`,
 };
+
+export const Gpt = Template.bind({});
+Gpt.args = {
+  onGpt: selection => alert(selection),
+  defaultValue: `# GPT
+
+Highlight text and press GPT`,
+};

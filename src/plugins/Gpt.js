@@ -7,24 +7,24 @@ export default class Gpt extends Extension {
     return "gpt";
   }
 
-  commands({ type }) {
+  commands() {
     return () => {
-      debugger;
-      return () => {
-        console.log("yo")
+      const _this = this;
+      return (state, dispatch) => {
+        const text = state.doc.cut(
+          state.selection.from,
+          state.selection.to
+        );
+        const markdown = _this.editor.serializer.serialize(text);
+        _this.editor.props.onSelect({
+          view: _this.editor.view,
+          text: text.textContent,
+          markdown 
+        });
+
+        this.options.onGpt(markdown);
       }
     }
   }
 
-  get plugins() {
-    return [
-      new Plugin({
-        props: {
-          callGpt: (view, event) => {
-            alert("u did it!");
-          },
-        },
-      }),
-    ];
-  }
 }
