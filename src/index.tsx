@@ -425,9 +425,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
           new MaxLength({
             maxLength: this.props.maxLength,
           }),
-          new Gpt({
-            onGpt: this.props.onGpt,
-          }),
+          ...(this.props.onGpt ? [new Gpt({ onGpt: this.props.onGpt })] : []),
         ].filter(extension => {
           // Optionaly disable extensions
           if (this.props.disableExtensions) {
