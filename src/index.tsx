@@ -677,7 +677,7 @@ class RichMarkdownEditor extends React.PureComponent<Props, State> {
   };
 
   handleOpenBlockMenu = (search: string) => {
-    this.setState({ blockMenuOpen: true, blockMenuSearch: search });
+    this.setState({ blockMenuOpen: false, blockMenuSearch: search });
   };
 
   handleCloseBlockMenu = () => {

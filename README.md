@@ -4,10 +4,10 @@
 
 # rich-markdown-editor
 
-A React and [Prosemirror](https://prosemirror.net/) based editor that powers [HackerNoon](http://app.hackernoon.com) and can also be used for displaying content in a read-only fashion.
+A React and [Prosemirror](https://prosemirror.net/) based editor that powers [Astra Security](https://www.getastra.com/) and can also be used for displaying content in a read-only fashion.
 The editor is WYSIWYG and includes formatting tools whilst retaining the ability to write markdown shortcuts inline and output plain Markdown. 
 
-> Important Note: This project is **not attempting to be an all-purpose Markdown editor**. It is built for the [HackerNoon](http://app.hackernoon.com) editor, and whilst others are welcome to fork or use this package in your own products, development decisions are centered around the needs of HackerNoon.
+> Important Note: This project is **not attempting to be an all-purpose Markdown editor**. It is built for the [Astra Security](https://www.getastra.com/) editor, and whilst others are welcome to fork or use this package in your own products, development decisions are centered around the needs of Astra Security.
 
 
 
