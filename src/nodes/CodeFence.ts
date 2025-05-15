@@ -117,11 +117,25 @@ export default class CodeFence extends Node {
   }
 
   commands({ type, schema }) {
-    return attrs =>
-      toggleBlockType(type, schema.nodes.paragraph, {
-        language: localStorage?.getItem(PERSISTENCE_KEY) || DEFAULT_LANGUAGE,
-        ...attrs,
-      });
+    return attrs => {
+      const language = localStorage?.getItem(PERSISTENCE_KEY) || DEFAULT_LANGUAGE;
+
+      // First try our custom method for wrapping multiple paragraphs
+      try {
+        // Import dynamically to avoid circular dependencies
+        const wrapInCodeBlock = require("../commands/wrapInCodeBlock").default;
+        return wrapInCodeBlock(type, {
+          language,
+          ...attrs,
+        });
+      } catch (error) {
+        // Fall back to the original method if there's an error
+        return toggleBlockType(type, schema.nodes.paragraph, {
+          language,
+          ...attrs,
+        });
+      }
+    };
   }
 
   keys({ type, schema }) {

@@ -13,6 +13,7 @@ import {
   HighlightIcon,
 } from "outline-icons";
 import GptIcon from "../icons/GptIcon";
+import CodeBlockIcon from "../icons/CodeBlockIcon";
 import { isInTable } from "prosemirror-tables";
 import { EditorState } from "prosemirror-state";
 import isInList from "../queries/isInList";
@@ -67,6 +68,12 @@ export default function formattingMenuItems(
       tooltip: dictionary.codeInline,
       icon: CodeIcon,
       active: isMarkActive(schema.marks.code_inline),
+    },
+    {
+      name: "code_block",
+      tooltip: dictionary.codeBlock,
+      icon: CodeBlockIcon,
+      active: isNodeActive(schema.nodes.code_block),
     },
     {
       name: "separator",
