@@ -120,6 +120,17 @@ export default class CodeFence extends Node {
     return attrs => {
       const language = localStorage?.getItem(PERSISTENCE_KEY) || DEFAULT_LANGUAGE;
 
+      // Check if current selection is already a code block
+      const isActive = isInCode(this.editor.view.state);
+
+      if (isActive) {
+        // If already a code block, convert to paragraph
+        return toggleBlockType(type, schema.nodes.paragraph)(
+          this.editor.view.state,
+          this.editor.view.dispatch
+        );
+      }
+
       // First try our custom method for wrapping multiple paragraphs
       try {
         // Import dynamically to avoid circular dependencies

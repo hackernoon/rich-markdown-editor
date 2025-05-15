@@ -167,11 +167,6 @@ export default class SelectionToolbar extends React.Component<Props> {
     const isCodeSelection = isNodeActive(state.schema.nodes.code_block)(state);
     const isDividerSelection = isNodeActive(state.schema.nodes.hr)(state);
 
-    // toolbar is disabled in code blocks, no bold / italic etc
-    if (isCodeSelection) {
-      return null;
-    }
-
     const colIndex = getColumnIndex(state.selection);
     const rowIndex = getRowIndex(state.selection);
     const isTableSelection = colIndex !== undefined && rowIndex !== undefined;
@@ -192,6 +187,12 @@ export default class SelectionToolbar extends React.Component<Props> {
       items = getImageMenuItems(state, dictionary);
     } else if (isDividerSelection) {
       items = getDividerMenuItems(state, dictionary);
+    } else if (isCodeSelection) {
+      // For code blocks, only show code_block item to allow toggling
+      items = getFormattingMenuItems(state, isTemplate, dictionary).filter(
+        item => item.name === "code_block"
+      );
+      isTextSelection = true;
     } else {
       items = getFormattingMenuItems(state, isTemplate, dictionary);
       isTextSelection = true;
