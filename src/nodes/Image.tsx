@@ -360,15 +360,27 @@ export default class Image extends Node {
         dispatch(state.tr.setNodeMarkup(selection.from, undefined, attrs));
         return true;
       },
-      replaceImage: () => state => {
-        const { view } = this.editor;
-        const {
+      replaceImage: () => (state, dispatch, view) => {
+        const { 
+          onImageReplace,
           uploadImage,
           onImageUploadStart,
           onImageUploadStop,
           onShowToast,
         } = this.editor.props;
+        
+        // If onImageReplace is provided, emit the event
+        if (onImageReplace) {
+          const { selection } = state;
+          if (selection.node && selection.node.type.name === "image") {
+            const getPos = () => selection.from;
+            onImageReplace(selection.node, getPos);
+            return true;
+          }
+          return false;
+        }
 
+        // Fallback to original implementation if no event handler provided
         if (!uploadImage) {
           throw new Error("uploadImage prop is required to replace images");
         }
@@ -389,6 +401,7 @@ export default class Image extends Node {
           });
         };
         inputElement.click();
+        return true;
       },
       alignCenter: () => (state, dispatch) => {
         const attrs = { ...state.selection.node.attrs, layoutClass: null };

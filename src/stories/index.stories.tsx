@@ -203,6 +203,7 @@ Placeholder.args = {
 
 export const Images = Template.bind({});
 Images.args = {
+  onImageReplace: node => alert(node),
   defaultValue: `# Images
 ![A caption](https://upload.wikimedia.org/wikipedia/commons/0/06/Davide-ragusa-gcDwzUGuUoI-unsplash.jpg)`,
 };
