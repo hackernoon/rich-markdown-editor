@@ -360,7 +360,8 @@ export default class Image extends Node {
         dispatch(state.tr.setNodeMarkup(selection.from, undefined, attrs));
         return true;
       },
-      replaceImage: () => (state, dispatch, view) => {
+      replaceImage: () => (state, dispatch) => {
+        const { view } = this.editor;
         const { 
           onImageReplace,
           uploadImage,
@@ -368,13 +369,38 @@ export default class Image extends Node {
           onImageUploadStop,
           onShowToast,
         } = this.editor.props;
-        
         // If onImageReplace is provided, emit the event
         if (onImageReplace) {
           const { selection } = state;
           if (selection.node && selection.node.type.name === "image") {
-            const getPos = () => selection.from;
-            onImageReplace(selection.node, getPos);
+            const callback = url => {
+              if (typeof url === 'string') {
+                const pos = view.state.selection.from;
+                const attrs = {
+                  ...selection.node.attrs,
+                  src: url,
+                };
+                const tr = view.state.tr.setNodeMarkup(pos, undefined, attrs);
+                view.dispatch(tr);
+              }
+              // else {
+              //   // Fallback to file upload for backward compatibility
+              //   const files = url;
+              //   if (!uploadImage) {
+              //     throw new Error("uploadImage prop is required to replace images");
+              //   }
+              //   insertFiles(this.editor.view, null, state.selection.from, files, {
+              //     uploadImage,
+              //     onImageUploadStart,
+              //     onImageUploadStop,
+              //     onShowToast,
+              //     dictionary: this.options.dictionary,
+              //     replaceExisting: true,
+              //   });
+              // }
+            }
+
+            onImageReplace(selection.node, callback);
             return true;
           }
           return false;

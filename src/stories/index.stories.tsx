@@ -203,7 +203,7 @@ Placeholder.args = {
 
 export const Images = Template.bind({});
 Images.args = {
-  onImageReplace: node => alert(node),
+  onImageReplace: (node, callback) => { callback("https://cdn.hackernoon.com/images/6sWrtbrOmsOIbrWzrG88lYfV4ch1-nh03aju.png"); },
   defaultValue: `# Images
 ![A caption](https://upload.wikimedia.org/wikipedia/commons/0/06/Davide-ragusa-gcDwzUGuUoI-unsplash.jpg)`,
 };
