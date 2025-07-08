@@ -1,17 +1,15 @@
-import {
-  BoldIcon,
-  CodeIcon,
-  Heading2Icon,
-  Heading3Icon,
-  BlockQuoteIcon,
-  LinkIcon,
-  StrikethroughIcon,
-  OrderedListIcon,
-  BulletedListIcon,
-  TodoListIcon,
-  InputIcon,
-  HighlightIcon,
-} from "outline-icons";
+import { InputIcon } from "outline-icons";
+import BoldIcon from "../icons/BoldIcon";
+import CodeIcon from "../icons/CodeIcon";
+import Heading2Icon from "../icons/Heading2Icon";
+import Heading3Icon from "../icons/Heading3Icon";
+import BlockQuoteIcon from "../icons/BlockQuoteIcon";
+import LinkIcon from "../icons/LinkIcon";
+import StrikeThroughIcon from "../icons/StrikeThroughIcon";
+import HighlightIcon from "../icons/HighlightIcon";
+import OrderedListIcon from "../icons/OrderedListIcon";
+import BulletedListIcon from "../icons/BulletedListIcon";
+import CheckListIcon from "../icons/CheckListIcon";
 import GptIcon from "../icons/GptIcon";
 import CodeBlockIcon from "../icons/CodeBlockIcon";
 import { isInTable } from "prosemirror-tables";
@@ -53,7 +51,7 @@ export default function formattingMenuItems(
     {
       name: "strikethrough",
       tooltip: dictionary.strikethrough,
-      icon: StrikethroughIcon,
+      icon: StrikeThroughIcon,
       active: isMarkActive(schema.marks.strikethrough),
     },
     {
@@ -110,7 +108,7 @@ export default function formattingMenuItems(
     {
       name: "checkbox_list",
       tooltip: dictionary.checkboxList,
-      icon: TodoListIcon,
+      icon: CheckListIcon,
       keywords: "checklist checkbox task",
       active: isNodeActive(schema.nodes.checkbox_list),
       visible: allowBlocks || isList,
