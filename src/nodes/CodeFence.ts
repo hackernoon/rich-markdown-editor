@@ -120,32 +120,35 @@ export default class CodeFence extends Node {
     return attrs => {
       const language = localStorage?.getItem(PERSISTENCE_KEY) || DEFAULT_LANGUAGE;
 
-      // Check if current selection is already a code block
-      const isActive = isInCode(this.editor.view.state);
-
+      const state = this.editor.view.state;
+      const isActive = isInCode(state);
       if (isActive) {
-        // If already a code block, convert to paragraph
-        return toggleBlockType(type, schema.nodes.paragraph)(
-          this.editor.view.state,
-          this.editor.view.dispatch
-        );
-      }
-
-      // First try our custom method for wrapping multiple paragraphs
-      try {
-        // Import dynamically to avoid circular dependencies
-        const wrapInCodeBlock = require("../commands/wrapInCodeBlock").default;
-        return wrapInCodeBlock(type, {
-          language,
-          ...attrs,
-        });
-      } catch (error) {
-        // Fall back to the original method if there's an error
         return toggleBlockType(type, schema.nodes.paragraph, {
           language,
-          ...attrs,
+          ...attrs
         });
       }
+
+      const { from, to } = state.selection;
+      const selectedText = state.doc.textBetween(from, to, "\n");
+      if (selectedText && selectedText.trim() !== "") {
+        console.log("selectedText", selectedText);
+        try {
+          const wrapInCodeBlock = require("../commands/wrapInCodeBlock").default;
+          return wrapInCodeBlock(type, {
+            language,
+            ...attrs,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      return toggleBlockType(type, schema.nodes.paragraph, {
+        language,
+        ...attrs
+      });
+
     };
   }
 
