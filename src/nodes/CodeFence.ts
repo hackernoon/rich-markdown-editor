@@ -119,36 +119,33 @@ export default class CodeFence extends Node {
   commands({ type, schema }) {
     return attrs => {
       const language = localStorage?.getItem(PERSISTENCE_KEY) || DEFAULT_LANGUAGE;
-
       const state = this.editor.view.state;
       const isActive = isInCode(state);
+
       if (isActive) {
         return toggleBlockType(type, schema.nodes.paragraph, {
           language,
-          ...attrs
+          ...attrs,
         });
       }
 
       const { from, to } = state.selection;
       const selectedText = state.doc.textBetween(from, to, "\n");
+
       if (selectedText && selectedText.trim() !== "") {
-        console.log("selectedText", selectedText);
         try {
           const wrapInCodeBlock = require("../commands/wrapInCodeBlock").default;
-          return wrapInCodeBlock(type, {
-            language,
-            ...attrs,
-          });
+          return wrapInCodeBlock(type, { language, ...attrs });
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
+        return false; 
       }
 
       return toggleBlockType(type, schema.nodes.paragraph, {
         language,
-        ...attrs
+        ...attrs,
       });
-
     };
   }
 
